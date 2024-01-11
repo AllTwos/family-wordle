@@ -93,6 +93,15 @@
     top: 10%;
     left: 15%;
   }
+  .modal-content {
+    position: absolute;
+    top: 2%;
+    left: 15%;
+    width: 70%;
+    height: 70%;
+    color: white;
+    text-align: center;
+  }
   .modal-content button {
     margin: 2px 2px;
   }

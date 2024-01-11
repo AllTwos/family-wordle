@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  color: white;
+  background: black;
+  z-index: -1;
+  font-family: 'Nunito', sans-serif;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -5,11 +17,12 @@
   align-items: center;
 }
 
-h1 {
-  margin: 5px 0;
+h3 {
+  margin: 20px 0 0 0;
+  text-align: center;
 }
 
-body {
-  color: white;
-  background: black;
+button {
+  font-family: 'Nunito', sans-serif;
 }
+

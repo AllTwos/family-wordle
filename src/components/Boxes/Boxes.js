@@ -318,7 +318,6 @@ const Boxes = () => {
           })}
         </div>
       </div>
-      <p>{theme}</p>
     </>
   );
 };
