@@ -10,10 +10,9 @@ const Boxes = () => {
   const [modal, setModal] = useState(false);
   const [complete, setComplete] = useState("");
   const [famWord, setFamWord] = useState("");
+  const [shake, setShake] = useState(false);
   const wordUp = famWord.toUpperCase();
   const wordArr = wordUp.split("");
-  console.log(famWord.toUpperCase().split("").length);
-  console.log(complete);
 
   const textInitState = [
     {
@@ -68,7 +67,6 @@ const Boxes = () => {
     const incompleteRow = text.findIndex((row, idx) => row.complete === false);
     const arr = [...text[incompleteRow].boxes];
     const firstBlank = arr.indexOf("");
-    console.log(firstBlank);
     if (e.target.value === "⌫") {
       firstBlank === -1
         ? (arr[arr.length - 1] = "")
@@ -125,11 +123,13 @@ const Boxes = () => {
           } else return item;
         })
       );
-      if (wordUp === boxesArr.join("")) {
-        setModal(true);
-        setComplete("win");
-        return;
-      }
+      if (finalColors.length === 0)
+        if (wordUp === boxesArr.join("")) {
+          //add shake state
+          setModal(true);
+          setComplete("win");
+          return;
+        }
     }
   };
   // console.log(text[0].colors[0][0]);
