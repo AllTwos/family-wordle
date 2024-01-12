@@ -11,7 +11,6 @@ const Boxes = () => {
   const [complete, setComplete] = useState("");
   const [famWord, setFamWord] = useState("");
   const [shake, setShake] = useState(false);
-  const myRef = useRef(null);
   const wordUp = famWord.toUpperCase();
   const wordArr = wordUp.split("");
 
@@ -98,7 +97,7 @@ const Boxes = () => {
 
   const handleCheck = (idx) => {
     const boxesArr = text[idx].boxes;
-    if (text[4].complete === true) {
+    if (text[5].complete === true) {
       setComplete("loss");
       setModal(true);
     } else {
@@ -135,7 +134,6 @@ const Boxes = () => {
     }
   };
 
-  console.log(myRef);
   return (
     <>
       {complete && <div className="overlay-block"></div>}
@@ -217,104 +215,6 @@ const Boxes = () => {
           </div>
         );
       })}
-      {/* <div className="boxes-box-wrapper">
-        {wordArr.map((char, idx) => {
-          const colorInfo = text[0].colors.find(
-            (colorArr) => colorArr[0] === idx
-          );
-          return (
-            <div
-              className={colorInfo ? `boxes-box ${colorInfo[2]}` : "boxes-box"}
-            >
-              {text[0].boxes[idx]}
-            </div>
-          );
-        })}
-      </div>
-      <div className="boxes-box-wrapper">
-        {wordArr.map((char, idx) => {
-          const colorInfo = text[0].colors.find(
-            (colorArr) => colorArr[0] === idx
-          );
-          return (
-            <div
-              className={colorInfo ? `boxes-box ${colorInfo[2]}` : "boxes-box"}
-            >
-              {text[0].boxes[idx]}
-            </div>
-          );
-        })}
-      </div>
-      <div className={`boxes-box-wrapper`}>
-        {wordArr.map((char, idx) => {
-          const colorInfo = text[1].colors.find(
-            (colorArr) => colorArr[0] === idx
-          );
-          return (
-            <p
-              className={colorInfo ? `boxes-box ${colorInfo[2]}` : "boxes-box"}
-            >
-              {text[1].boxes[idx]}
-            </p>
-          );
-        })}
-      </div>
-      <div className="boxes-box-wrapper">
-        {wordArr.map((char, idx) => {
-          const colorInfo = text[2].colors.find(
-            (colorArr) => colorArr[0] === idx
-          );
-          return (
-            <p
-              className={colorInfo ? `boxes-box ${colorInfo[2]}` : "boxes-box"}
-            >
-              {text[2].boxes[idx]}
-            </p>
-          );
-        })}
-      </div>
-      <div className={`boxes-box-wrapper`}>
-        {wordArr.map((char, idx) => {
-          const colorInfo = text[3].colors.find(
-            (colorArr) => colorArr[0] === idx
-          );
-          return (
-            <p
-              className={colorInfo ? `boxes-box ${colorInfo[2]}` : "boxes-box"}
-            >
-              {text[3].boxes[idx]}
-            </p>
-          );
-        })}
-      </div>
-      <div className="boxes-box-wrapper">
-        {wordArr.map((char, idx) => {
-          const colorInfo = text[4].colors.find(
-            (colorArr) => colorArr[0] === idx
-          );
-          return (
-            <p
-              className={colorInfo ? `boxes-box ${colorInfo[2]}` : "boxes-box"}
-            >
-              {text[4].boxes[idx]}
-            </p>
-          );
-        })}
-      </div>
-      <div className={`boxes-box-wrapper`}>
-        {wordArr.map((char, idx) => {
-          const colorInfo = text[5].colors.find(
-            (colorArr) => colorArr[0] === idx
-          );
-          return (
-            <p
-              className={colorInfo ? `boxes-box ${colorInfo[2]}` : "boxes-box"}
-            >
-              {text[5].boxes[idx]}
-            </p>
-          );
-        })}
-      </div> */}
       {/* Keyboard */}
       <div className="keyboard-wrapper">
         <div className="keyboard">
