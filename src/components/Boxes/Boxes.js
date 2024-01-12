@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./styles.css";
 
 import { larWord, freeWord, theme } from "../../misc/misc.js";
@@ -11,6 +11,7 @@ const Boxes = () => {
   const [complete, setComplete] = useState("");
   const [famWord, setFamWord] = useState("");
   const [shake, setShake] = useState(false);
+  const myRef = useRef(null);
   const wordUp = famWord.toUpperCase();
   const wordArr = wordUp.split("");
 
@@ -123,16 +124,18 @@ const Boxes = () => {
           } else return item;
         })
       );
-      if (finalColors.length === 0)
-        if (wordUp === boxesArr.join("")) {
-          //add shake state
-          setModal(true);
-          setComplete("win");
-          return;
-        }
+      if (finalColors.length === 0) {
+        setShake(idx);
+      }
+      if (wordUp === boxesArr.join("")) {
+        setModal(true);
+        setComplete("win");
+        return;
+      }
     }
   };
-  // console.log(text[0].colors[0][0]);
+
+  console.log(myRef);
   return (
     <>
       {complete && <div className="overlay-block"></div>}
@@ -192,6 +195,42 @@ const Boxes = () => {
         </div>
       </div>
       {/* Word Boxes */}
+      {text.map((item, pindex) => {
+        return (
+          <div
+            className={`${shake === pindex && "shake-box"} boxes-box-wrapper`}
+          >
+            {wordArr.map((char, idx) => {
+              const colorInfo = text[pindex].colors.find(
+                (colorArr) => colorArr[0] === idx
+              );
+              return (
+                <div
+                  className={
+                    colorInfo ? `boxes-box ${colorInfo[2]}` : "boxes-box"
+                  }
+                >
+                  {text[pindex].boxes[idx]}
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
+      {/* <div className="boxes-box-wrapper">
+        {wordArr.map((char, idx) => {
+          const colorInfo = text[0].colors.find(
+            (colorArr) => colorArr[0] === idx
+          );
+          return (
+            <div
+              className={colorInfo ? `boxes-box ${colorInfo[2]}` : "boxes-box"}
+            >
+              {text[0].boxes[idx]}
+            </div>
+          );
+        })}
+      </div>
       <div className="boxes-box-wrapper">
         {wordArr.map((char, idx) => {
           const colorInfo = text[0].colors.find(
@@ -206,7 +245,7 @@ const Boxes = () => {
           );
         })}
       </div>
-      <div>
+      <div className={`boxes-box-wrapper`}>
         {wordArr.map((char, idx) => {
           const colorInfo = text[1].colors.find(
             (colorArr) => colorArr[0] === idx
@@ -234,7 +273,7 @@ const Boxes = () => {
           );
         })}
       </div>
-      <div>
+      <div className={`boxes-box-wrapper`}>
         {wordArr.map((char, idx) => {
           const colorInfo = text[3].colors.find(
             (colorArr) => colorArr[0] === idx
@@ -262,7 +301,7 @@ const Boxes = () => {
           );
         })}
       </div>
-      <div>
+      <div className={`boxes-box-wrapper`}>
         {wordArr.map((char, idx) => {
           const colorInfo = text[5].colors.find(
             (colorArr) => colorArr[0] === idx
@@ -275,7 +314,7 @@ const Boxes = () => {
             </p>
           );
         })}
-      </div>
+      </div> */}
       {/* Keyboard */}
       <div className="keyboard-wrapper">
         <div className="keyboard">
