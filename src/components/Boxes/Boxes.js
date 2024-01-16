@@ -97,7 +97,10 @@ const Boxes = () => {
 
   const handleCheck = (idx) => {
     const boxesArr = text[idx].boxes;
-    if (text[5].complete === true) {
+    console.log(text);
+    console.log(text[5].boxes.join(""), wordUp);
+    if (idx === 5 && text[5].boxes.join("") !== wordUp) {
+      console.log("LOSS!");
       setComplete("loss");
       setModal(true);
     } else {
@@ -206,6 +209,7 @@ const Boxes = () => {
 
       setText(
         text.map((item) => {
+          console.log("HERE WE GO", `row${idx}`);
           if (item.name === `row${idx}`) {
             return { ...item, colors: finalColors, complete: true };
           } else return item;
@@ -271,7 +275,7 @@ const Boxes = () => {
               <button
                 onClick={() => {
                   setModal(false);
-                  setText(textInitState);
+                  // setText(textInitState);
                 }}
               >
                 Close
