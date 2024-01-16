@@ -13,11 +13,6 @@
 
 }
 
-.mine {
-  width: 100%;
-  height: 100%;
-}
-
 .shake-box {
   animation: shake 0.5s;
   /* animation-iteration-count: infinite; */
@@ -70,7 +65,10 @@
 }
 
 .modal {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   background: rgba(13, 167, 139, 0.965);
   width: 50%;
@@ -86,17 +84,13 @@
 }
 
 .modal-content {
-  position: absolute;
-  top: 15%;
-  left: 15%;
-  width: 70%;
-  height: 70%;
   color: white;
   text-align: center;
 }
 
 .modal-content p {
   font-size: 30px;
+  margin: 15px 0;
 }
 .modal-content button {
   font-size: 20px;
@@ -112,19 +106,11 @@
 @media screen and (max-width: 700px) {
   .modal {
     width: 70%;
-    height: 60%;
+    height: 50%;
     top: 10%;
     left: 15%;
   }
-  .modal-content {
-    position: absolute;
-    top: 2%;
-    left: 15%;
-    width: 70%;
-    height: 70%;
-    color: white;
-    text-align: center;
-  }
+  
   .modal-content button {
     margin: 2px 2px;
   }

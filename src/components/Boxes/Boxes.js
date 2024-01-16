@@ -54,7 +54,7 @@ const Boxes = () => {
   ];
 
   const [text, setText] = useState(textInitState);
-  console.log(text);
+  // console.log(text);
   useEffect(() => {
     setModal(true);
   }, []);
@@ -101,7 +101,7 @@ const Boxes = () => {
       setComplete("loss");
       setModal(true);
     } else {
-      const finalColors = [];
+      let finalColors = [];
       wordArr.forEach((element, idx) => {
         let found;
         for (let i = 0; i < boxesArr.length; i++) {
@@ -111,10 +111,98 @@ const Boxes = () => {
             finalColors.push([i, element, "box-green", idx]);
           } else if (boxesArr[i] === element && i !== idx && !found) {
             console.log("match on letter but not index!", element, i, idx);
-            finalColors.push([i, element, "box-yellow", idx]);
+            finalColors.push([i, element, "box-yellow", idx]); //this ends us up with more yellows than needed, maybe change
           }
         }
       });
+
+      //filter the yellows here
+      let usedLetters = [];
+      finalColors.forEach((element, idx) => {
+        let answerLettersNum = wordArr.filter(
+          (word) => word === element[1]
+        ).length;
+        let guessLettersNum = boxesArr.filter(
+          (word) => word === element[1]
+        ).length;
+
+        const findAllYellows = finalColors.filter(
+          (arr) => arr[1] === element[1] && arr[2] === "box-yellow"
+        );
+        console.log(findAllYellows, "find all yellows");
+
+        const allGreens = finalColors.filter(
+          (arr) => arr[1] === element[1] && arr[2] === "box-green"
+        );
+
+        //filter all others without that letter
+        const finalColorsReduced = finalColors.filter(
+          (arr) => arr[1] !== element[1]
+        );
+        console.log(finalColorsReduced, "final colors reduced", element[1]);
+
+        // if (allGreens.length === answerLettersNum) {
+        //   usedLetters.push(element[1]);
+        //   return
+        // }
+
+        if (
+          guessLettersNum === answerLettersNum &&
+          usedLetters.indexOf(element[1]) === -1
+        ) {
+          usedLetters.push(element[1]);
+          if (allGreens.length > 0) {
+            const filteredYellows = findAllYellows.filter(
+              (arr) => arr[0] !== allGreens[0][0] //crap
+            );
+            finalColors = [
+              ...finalColorsReduced,
+              ...allGreens,
+              ...filteredYellows,
+            ];
+          } else {
+            return;
+          }
+        }
+
+        if (
+          guessLettersNum < answerLettersNum &&
+          usedLetters.indexOf(element[1]) === -1
+        ) {
+          if (findAllYellows.length === allGreens.length) {
+            finalColors = [...finalColorsReduced, ...allGreens];
+            usedLetters.push(element[1]);
+          }
+        }
+
+        if (
+          guessLettersNum > answerLettersNum &&
+          usedLetters.indexOf(element[1]) === -1
+        ) {
+          console.log(element[1], "unique letter overguessed");
+          usedLetters.push(element[1]);
+
+          //keep only the amount of letters in the answer
+          let remainingYellows = findAllYellows.slice(
+            0,
+            answerLettersNum - allGreens.length
+          );
+          console.log(remainingYellows, "remaining yellows");
+
+          if (allGreens.length === answerLettersNum) {
+            remainingYellows = [];
+          }
+
+          //merge them together
+          finalColors = [
+            ...finalColorsReduced,
+            ...remainingYellows,
+            ...allGreens,
+          ];
+        }
+      });
+
+      console.log(finalColors, "final colors FINAL");
 
       setText(
         text.map((item) => {
