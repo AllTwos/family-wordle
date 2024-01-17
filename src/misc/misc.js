@@ -1,5 +1,5 @@
-export const larWord = "hickory";
-export const freeWord = "dallas";
+export const larWord = "crawdad";
+export const freeWord = "teresa";
 export const theme = "";
 
 export const keyboardKeysTop = [
